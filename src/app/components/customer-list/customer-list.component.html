@@ -1,0 +1,33 @@
+<div class="container">
+    <h2>Listado de customers</h2>
+    <a class="btn btn-primary" routerLink="customer/add">Create customer</a>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Fecha N.</th>
+            <th scope="col">Opciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let customer of customers"
+            [ngClass]="{ 'row-hover': hoveredId === customer.id }"
+            (mouseenter)="hoveredId = customer.id!"
+            (mouseleave)="hoveredId = null">
+            <th scope="row" >{{customer.id}}</th>
+            <td >{{customer.firstName | uppercase}} </td>
+            <td>{{customer.lastName | uppercase}}</td>
+            <td>{{customer.email}}</td>
+            <td>{{ customer.birthDate  | date:'dd-MM-yyyy'}}</td>
+            <td> <a><i (click)="deleteCustomer(customer.id!)" class="bi bi-trash"></i></a> | 
+                <a [routerLink]="['/customer/edit', customer.id]"><i class="bi bi-pencil-square"></i></a>
+            </td>
+        </tr>
+        
+        </tbody>
+    </table>
+
+</div>

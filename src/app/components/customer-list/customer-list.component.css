@@ -1,0 +1,7 @@
+.row-hover {
+    background-color: #e0f7fa !important;
+  }
+
+  .table-hover tbody tr:hover {
+    background-color: #e0f7fa;
+  }

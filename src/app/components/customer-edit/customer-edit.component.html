@@ -1,0 +1,68 @@
+
+<div class="container" *ngIf="customer">
+    <h2>Editar Customer</h2>
+    <div>
+        <a class="btn btn-primary" href="">volver a la lista</a>
+    </div>
+    <form [formGroup]="customerForm" (ngSubmit)="updateCustomer()">
+        <div>
+            <input type="text" [hidden]="true" class="form-control" id="id" 
+                formControlName="id">
+        </div>
+        <!-- Nombre -->
+        <div class="mb-3">
+            <label for="firstName" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="firstName" 
+                formControlName="firstName" placeholder="Ingresa el nombre">
+            
+            <div class="text-danger" *ngIf="customerForm.get('firstName')?.invalid && customerForm.get('firstName')?.touched">
+                El nombre es obligatorio.
+            </div>
+            <div class="text-danger" *ngIf="customerForm.get('firstName')?.errors?.['minlength'] ">
+                Se esperan minimo 3 caracteres.
+            </div>
+
+        </div>
+
+        <!-- Apellido -->
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="lastName" 
+                formControlName="lastName" placeholder="Ingresa el apellido">
+            
+            <div class="text-danger" *ngIf="customerForm.get('lastName')?.invalid && customerForm.get('lastName')?.touched">
+                El apellido es obligatorio y debe tener al menos 3 caracteres.
+            </div>
+        </div>
+
+        <!-- Correo -->
+        <div class="mb-3">
+            <label for="email" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" id="email"
+                formControlName="email" placeholder="Ingresa el correo">
+            
+            <div class="text-danger" *ngIf="customerForm.get('email')?.invalid && customerForm.get('email')?.touched">
+                Ingresa un correo electrónico válido.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="birthDate" class="form-label">Fecha de Nacimiento</label>
+            <input formControlName="birthDate" type="date" class="form-control">
+        </div>
+
+        <div class="mb-3">
+            <label>Tipo de Cliente</label>
+            <select formControlName="typeCustomer" class="form-control">
+                <option *ngFor="let type of typeCustomerList" [value]="type.id">
+                    {{ type.name }}
+                </option>
+            </select>
+        </div>
+
+        <!-- Botón Deshabilitado si el formulario es inválido -->
+        <button type="submit" class="btn btn-primary" [disabled]="customerForm.invalid">
+            Actualizar
+        </button>
+    </form>
+</div>
